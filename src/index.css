@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Leaflet map container fix */
+.leaflet-container {
+  font-family: inherit;
+}
+
+/* Hide Leaflet attribution to maximize map area */
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* Remove default Leaflet marker styling for custom divIcon */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Custom marker - uses inline styles in RestaurantMarker */
