@@ -34,7 +34,7 @@ function App() {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [halalFilter, setHalalFilter] = useState('all');
   const [prayerRoomOnly, setPrayerRoomOnly] = useState(false);
-  const [legendOpen, setLegendOpen] = useState(false);
+  const [legendOpen, setLegendOpen] = useState(true);
   const [detailRestaurant, setDetailRestaurant] = useState(null);
 
   const handleAreaChange = (areaId) => {
@@ -172,8 +172,8 @@ function App() {
           />
         </MapContainer>
 
-        {/* Compact collapsible legend - above map, below panel when expanded (z-index 450 < 500) */}
-        <div className="absolute bottom-[220px] left-4 z-[450]">
+        {/* Compact collapsible legend - above map and markers (z-index 700 > Leaflet marker pane 600) */}
+        <div className="absolute bottom-[220px] left-4 z-[700]">
           <button
             type="button"
             onClick={() => setLegendOpen(!legendOpen)}
