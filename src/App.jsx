@@ -5,6 +5,7 @@ import { AREAS, getAreaById } from './data/areas';
 import { RestaurantMarker } from './components/RestaurantMarker';
 import { RestaurantInfoPanel } from './components/RestaurantInfoPanel';
 import { RestaurantDetailModal } from './components/RestaurantDetailModal';
+import MapInitializer from './components/MapInitializer';
 
 // Map tile - using CartoDB Positron for a clean, trustworthy look
 const MAP_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
@@ -163,6 +164,7 @@ function App() {
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             attribution={MAP_ATTRIBUTION}
           />
+          <MapInitializer />
           <MapContent
             filteredRestaurants={filteredRestaurants}
             selectedRestaurant={displayRestaurant}

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure full height for map container (Leaflet needs explicit dimensions) */
+html,
+body,
+#root {
+  height: 100%;
+}
+
 /* Leaflet map container fix */
 .leaflet-container {
   font-family: inherit;
