@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { HALAL_LEVELS } from '../data/restaurants';
 import { RestaurantRatings } from './RestaurantRatings';
 
@@ -37,6 +37,13 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
 
   const photos = restaurant.photos || [];
   const displayPhotos = photos.length >= 5 ? photos : [...photos, ...Array(Math.max(0, 5 - photos.length)).fill(null)];
+  const photoScrollRef = useRef(null);
+
+  useEffect(() => {
+    if (photoScrollRef.current) {
+      photoScrollRef.current.scrollLeft = 0;
+    }
+  }, [restaurant?.id]);
 
   const expandedHeight = getExpandedHeight();
   const currentHeight = dragHeight ?? (expanded ? expandedHeight : COLLAPSED_HEIGHT);
@@ -138,7 +145,7 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
 
       {/* Photos - always visible, above scroll */}
       <div className="shrink-0 px-4 sm:px-6 pb-3">
-        <div className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory -mx-4 sm:mx-0 px-6 sm:px-0">
+        <div ref={photoScrollRef} className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory -mx-4 sm:mx-0 px-6 sm:px-0">
           {displayPhotos.slice(0, 5).map((url, i) => (
             <div
               key={i}

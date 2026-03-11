@@ -1,7 +1,16 @@
+import { useRef, useEffect } from 'react';
 import { HALAL_LEVELS } from '../data/restaurants';
 import { RestaurantRatings } from './RestaurantRatings';
 
 export function RestaurantDetailModal({ restaurant, onClose }) {
+  const photoScrollRef = useRef(null);
+
+  useEffect(() => {
+    if (photoScrollRef.current) {
+      photoScrollRef.current.scrollLeft = 0;
+    }
+  }, [restaurant?.id]);
+
   if (!restaurant) return null;
 
   const photos = restaurant.photos || [];
@@ -77,7 +86,7 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
 
         {/* Hero photo gallery - 5 photos, swipeable */}
         <div className="relative">
-          <div className="flex gap-3 p-4 md:p-6 overflow-x-auto snap-x snap-mandatory scroll-smooth justify-start">
+          <div ref={photoScrollRef} className="flex gap-3 p-4 md:p-6 overflow-x-auto snap-x snap-mandatory scroll-smooth justify-start">
             {(photos.length >= 5 ? photos : [...photos, ...Array(5 - photos.length).fill(null)]).map((url, i) => (
               <div
                 key={i}
