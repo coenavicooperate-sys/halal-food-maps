@@ -227,36 +227,6 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
         </div>
       </div>
 
-      {/* Reserve / Call + Route bar - mobile only, fixed at bottom of panel */}
-      <div className="md:hidden shrink-0 border-t border-slate-200 p-3 bg-white">
-        <div className="flex gap-3">
-          {restaurant.reservationUrl ? (
-            <a
-              href={restaurant.reservationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 py-3 rounded-lg bg-emerald-600 text-white font-semibold text-center hover:bg-emerald-700 transition-colors"
-            >
-              Reserve
-            </a>
-          ) : restaurant.phone ? (
-            <a
-              href={`tel:${restaurant.phone}`}
-              className="flex-1 py-3 rounded-lg bg-emerald-600 text-white font-semibold text-center hover:bg-emerald-700 transition-colors"
-            >
-              Call
-            </a>
-          ) : null}
-          <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${restaurant.lat},${restaurant.lng}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-center hover:bg-slate-50 transition-colors"
-          >
-            Route
-          </a>
-        </div>
-      </div>
     </div>
   );
 }

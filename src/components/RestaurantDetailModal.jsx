@@ -76,8 +76,8 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
         </button>
 
         {/* Hero photo gallery - 5 photos, swipeable */}
-        <div className="relative">
-          <div className="flex gap-3 px-8 py-4 md:px-6 md:py-6 overflow-x-auto snap-x snap-mandatory scroll-smooth justify-start">
+        <div className="relative px-6 md:px-8">
+          <div className="flex gap-3 px-8 py-4 md:px-0 md:py-6 overflow-x-auto snap-x snap-mandatory scroll-smooth justify-start">
             {(photos.length >= 5 ? photos : [...photos, ...Array(5 - photos.length).fill(null)]).map((url, i) => (
               <div
                 key={i}
