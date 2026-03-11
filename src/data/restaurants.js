@@ -68,6 +68,7 @@ export const restaurants = [
       { name: 'Rice bowl add-on', price: '¥150', desc: 'Perfect with ramen', photo: portrait('ramen1', 8) },
     ],
     galleryPhotos: gallery('ramen1'),
+    reviews: { halalFoodMaps: { score: 4.8, count: 156 }, google: { score: 4.6, count: 312 }, tabelog: { score: 3.9, count: 48 } },
   },
   {
     id: 2,
@@ -105,6 +106,7 @@ export const restaurants = [
       { name: 'Conveyor belt (per plate)', price: '¥120-380', desc: 'Pick as you like', photo: portrait('sushi2', 8) },
     ],
     galleryPhotos: gallery('sushi2'),
+    reviews: { halalFoodMaps: { score: 4.6, count: 203 }, google: { score: 4.5, count: 428 }, tabelog: { score: 3.8, count: 62 } },
   },
   {
     id: 3,
@@ -142,6 +144,7 @@ export const restaurants = [
       { name: 'Chicken thigh', price: '¥980', desc: 'Yakitori style', photo: portrait('yakiniku3', 8) },
     ],
     galleryPhotos: gallery('yakiniku3'),
+    reviews: { halalFoodMaps: { score: 4.2, count: 89 }, google: { score: 4.4, count: 187 }, tabelog: { score: 3.7, count: 34 } },
   },
   {
     id: 4,
@@ -179,6 +182,7 @@ export const restaurants = [
       { name: 'Falafel wrap', price: '¥980', desc: 'With tahini', photo: portrait('cafe4', 8) },
     ],
     galleryPhotos: gallery('cafe4'),
+    reviews: { halalFoodMaps: { score: 4.9, count: 234 }, google: { score: 4.7, count: 521 }, tabelog: { score: 4.0, count: 78 } },
   },
   {
     id: 5,
@@ -216,6 +220,7 @@ export const restaurants = [
       { name: 'Boiled egg', price: '¥100', desc: 'Add-on', photo: portrait('ramen5', 8) },
     ],
     galleryPhotos: gallery('ramen5'),
+    reviews: { halalFoodMaps: { score: 4.5, count: 312 }, google: { score: 4.5, count: 892 }, tabelog: { score: 3.8, count: 156 } },
   },
   {
     id: 6,
@@ -253,6 +258,7 @@ export const restaurants = [
       { name: 'Vegetable maki', price: '¥450', desc: 'Veggie option', photo: portrait('sushi6', 8) },
     ],
     galleryPhotos: gallery('sushi6'),
+    reviews: { halalFoodMaps: { score: 3.9, count: 45 }, google: { score: 4.2, count: 98 }, tabelog: { score: 3.5, count: 23 } },
   },
   {
     id: 7,
@@ -290,6 +296,7 @@ export const restaurants = [
       { name: 'Rice', price: '¥200', desc: '', photo: portrait('yakiniku7', 8) },
     ],
     galleryPhotos: gallery('yakiniku7'),
+    reviews: { halalFoodMaps: { score: 3.5, count: 28 }, google: { score: 4.0, count: 67 }, tabelog: { score: 3.3, count: 15 } },
   },
   {
     id: 8,
@@ -327,5 +334,6 @@ export const restaurants = [
       { name: 'Smoothie bowl', price: '¥980', desc: 'Seasonal', photo: portrait('cafe8', 8) },
     ],
     galleryPhotos: gallery('cafe8'),
+    reviews: { halalFoodMaps: { score: 4.4, count: 167 }, google: { score: 4.4, count: 234 }, tabelog: { score: 3.7, count: 41 } },
   },
 ];

@@ -45,12 +45,18 @@ function App() {
   };
 
   const filteredRestaurants = useMemo(() => {
-    return restaurants.filter((r) => {
-      if (categoryFilter !== 'all' && r.category !== categoryFilter) return false;
-      if (halalFilter !== 'all' && r.halalLevel !== halalFilter) return false;
-      if (prayerRoomOnly && !r.prayerRoom) return false;
-      return true;
-    });
+    return restaurants
+      .filter((r) => {
+        if (categoryFilter !== 'all' && r.category !== categoryFilter) return false;
+        if (halalFilter !== 'all' && r.halalLevel !== halalFilter) return false;
+        if (prayerRoomOnly && !r.prayerRoom) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        const scoreA = a.reviews?.halalFoodMaps?.score ?? 0;
+        const scoreB = b.reviews?.halalFoodMaps?.score ?? 0;
+        return scoreB - scoreA;
+      });
   }, [restaurants, categoryFilter, halalFilter, prayerRoomOnly]);
 
   // Auto-select first filtered restaurant when selection is filtered out

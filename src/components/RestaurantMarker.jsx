@@ -1,6 +1,7 @@
 import { Marker, Popup } from 'react-leaflet';
 import { divIcon } from 'leaflet';
 import { HALAL_LEVELS } from '../data/restaurants';
+import { RestaurantRatings } from './RestaurantRatings';
 
 import ramenIcon from '../assets/icons/ramen.png';
 import sushiIcon from '../assets/icons/sushi.png';
@@ -84,6 +85,9 @@ export function RestaurantMarker({ restaurant, isSelected, onSelect }) {
                 Prayer room
               </span>
             )}
+          </div>
+          <div className="mt-1.5 pt-1.5 border-t border-slate-200">
+            <RestaurantRatings restaurant={restaurant} compact />
           </div>
         </div>
       </Popup>

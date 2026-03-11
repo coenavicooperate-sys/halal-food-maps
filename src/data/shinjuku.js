@@ -49,6 +49,7 @@ export const shinjukuRestaurants = [
       { name: 'Rice add-on', price: '¥150', desc: '', photo: portrait('sjramen1', 8) },
     ],
     galleryPhotos: gallery('sjramen1'),
+    reviews: { halalFoodMaps: { score: 4.7, count: 134 }, google: { score: 4.5, count: 289 }, tabelog: { score: 3.8, count: 52 } },
   },
   {
     id: 102,
@@ -86,6 +87,7 @@ export const shinjukuRestaurants = [
       { name: 'Conveyor (per plate)', price: '¥120-380', desc: 'Pick & choose', photo: portrait('sjsushi2', 8) },
     ],
     galleryPhotos: gallery('sjsushi2'),
+    reviews: { halalFoodMaps: { score: 4.4, count: 178 }, google: { score: 4.4, count: 356 }, tabelog: { score: 3.7, count: 44 } },
   },
   {
     id: 103,
@@ -123,6 +125,7 @@ export const shinjukuRestaurants = [
       { name: 'Chicken thigh', price: '¥980', desc: '', photo: portrait('sjyaki3', 8) },
     ],
     galleryPhotos: gallery('sjyaki3'),
+    reviews: { halalFoodMaps: { score: 4.1, count: 76 }, google: { score: 4.3, count: 145 }, tabelog: { score: 3.6, count: 29 } },
   },
   {
     id: 104,
@@ -160,6 +163,7 @@ export const shinjukuRestaurants = [
       { name: 'Falafel wrap', price: '¥980', desc: '', photo: portrait('sjcafe4', 8) },
     ],
     galleryPhotos: gallery('sjcafe4'),
+    reviews: { halalFoodMaps: { score: 4.8, count: 198 }, google: { score: 4.6, count: 412 }, tabelog: { score: 3.9, count: 67 } },
   },
   {
     id: 105,
@@ -197,6 +201,7 @@ export const shinjukuRestaurants = [
       { name: 'Boiled egg', price: '¥100', desc: '', photo: portrait('sjramen5', 8) },
     ],
     galleryPhotos: gallery('sjramen5'),
+    reviews: { halalFoodMaps: { score: 4.3, count: 245 }, google: { score: 4.4, count: 567 }, tabelog: { score: 3.7, count: 89 } },
   },
   {
     id: 106,
@@ -234,6 +239,7 @@ export const shinjukuRestaurants = [
       { name: 'Vegetable maki', price: '¥450', desc: '', photo: portrait('sjsushi6', 8) },
     ],
     galleryPhotos: gallery('sjsushi6'),
+    reviews: { halalFoodMaps: { score: 3.8, count: 38 }, google: { score: 4.1, count: 82 }, tabelog: { score: 3.4, count: 19 } },
   },
   {
     id: 107,
@@ -271,6 +277,7 @@ export const shinjukuRestaurants = [
       { name: 'Rice', price: '¥200', desc: '', photo: portrait('sjyaki7', 8) },
     ],
     galleryPhotos: gallery('sjyaki7'),
+    reviews: { halalFoodMaps: { score: 3.4, count: 22 }, google: { score: 3.9, count: 54 }, tabelog: { score: 3.2, count: 12 } },
   },
   {
     id: 108,
@@ -308,5 +315,6 @@ export const shinjukuRestaurants = [
       { name: 'Smoothie bowl', price: '¥980', desc: '', photo: portrait('sjcafe8', 8) },
     ],
     galleryPhotos: gallery('sjcafe8'),
+    reviews: { halalFoodMaps: { score: 4.5, count: 142 }, google: { score: 4.5, count: 198 }, tabelog: { score: 3.8, count: 36 } },
   },
 ];

@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { HALAL_LEVELS } from '../data/restaurants';
+import { RestaurantRatings } from './RestaurantRatings';
 
 import ramenIcon from '../assets/icons/ramen.png';
 import sushiIcon from '../assets/icons/sushi.png';
@@ -130,6 +131,9 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
             </span>
           )}
         </div>
+        <div className="mt-2">
+          <RestaurantRatings restaurant={restaurant} />
+        </div>
       </div>
 
       {/* Scrollable content - centered on PC */}
@@ -208,6 +212,7 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
                         )}
                       </div>
                       <p className="text-xs text-slate-500 capitalize">{r.category}</p>
+                      <RestaurantRatings restaurant={r} compact />
                     </div>
                     {r.prayerRoom && (
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 shrink-0">
