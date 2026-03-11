@@ -5,7 +5,10 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
   if (!restaurant) return null;
 
   const photos = restaurant.photos || [];
-  const menu = restaurant.menu || [];
+  const menu = restaurant.menu;
+  const menuFood = (menu?.food || []).slice(0, 10);
+  const menuDrinks = (menu?.drinks || []).slice(0, 5);
+  const hasMenu = menuFood.length > 0 || menuDrinks.length > 0;
   const features = (restaurant.features || []).slice(0, 4);
   const recommendedMenu = (restaurant.recommendedMenu || []).slice(0, 4);
   const galleryPhotos = (restaurant.galleryPhotos || []).slice(0, 10);
@@ -144,22 +147,55 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
           )}
 
           {/* Menu section */}
-          {menu.length > 0 && (
+          {hasMenu && (
             <section className="mb-6">
               <h2 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
                 <span>📋</span> Menu
               </h2>
-              <div className="bg-slate-50 rounded-xl p-4 space-y-3">
-                {menu.map((item, i) => (
-                  <div key={i} className="flex justify-between items-start gap-4">
-                    <div>
-                      <p className="font-medium text-slate-800">{item.name}</p>
-                      {item.desc && <p className="text-sm text-slate-500">{item.desc}</p>}
+              <div className="bg-slate-50 rounded-xl p-4 space-y-4">
+                {menuFood.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-600 mb-2">Food</h3>
+                    <div className="space-y-2">
+                      {menuFood.map((item, i) => (
+                        <div key={i} className="flex justify-between items-start gap-4">
+                          <div>
+                            <p className="font-medium text-slate-800">{item.name}</p>
+                            {item.desc && <p className="text-sm text-slate-500">{item.desc}</p>}
+                          </div>
+                          <span className="font-semibold text-slate-700 shrink-0">{item.price}</span>
+                        </div>
+                      ))}
                     </div>
-                    <span className="font-semibold text-slate-700 shrink-0">{item.price}</span>
                   </div>
-                ))}
+                )}
+                {menuDrinks.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-600 mb-2">Drinks</h3>
+                    <div className="space-y-2">
+                      {menuDrinks.map((item, i) => (
+                        <div key={i} className="flex justify-between items-start gap-4">
+                          <div>
+                            <p className="font-medium text-slate-800">{item.name}</p>
+                            {item.desc && <p className="text-sm text-slate-500">{item.desc}</p>}
+                          </div>
+                          <span className="font-semibold text-slate-700 shrink-0">{item.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
+              {restaurant.menuBookUrl && (
+                <a
+                  href={restaurant.menuBookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+                >
+                  All menu →
+                </a>
+              )}
             </section>
           )}
 
