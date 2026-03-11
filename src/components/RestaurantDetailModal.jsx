@@ -1,4 +1,5 @@
 import { HALAL_LEVELS } from '../data/restaurants';
+import { RestaurantRatings } from './RestaurantRatings';
 
 export function RestaurantDetailModal({ restaurant, onClose }) {
   if (!restaurant) return null;
@@ -79,6 +80,10 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
                 Prayer room available
               </span>
             )}
+          </div>
+
+          <div className="mb-6 flex justify-center">
+            <RestaurantRatings restaurant={restaurant} />
           </div>
 
           <p className="text-slate-600 mb-6 text-center md:text-left">{restaurant.description}</p>

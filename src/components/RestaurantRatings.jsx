@@ -1,5 +1,5 @@
 /**
- * Displays Halal Food Maps, Google, and 食べログ review scores/counts
+ * Displays Halal Food Maps, Google, and Tabelog review scores/counts
  */
 export function RestaurantRatings({ restaurant, compact = false }) {
   const reviews = restaurant.reviews;
@@ -11,7 +11,7 @@ export function RestaurantRatings({ restaurant, compact = false }) {
     <span className="flex items-center gap-1">
       <span className="text-slate-500 text-[10px]">{label}:</span>
       <span className="font-semibold text-slate-800">{score}</span>
-      <span className="text-slate-500 text-[10px]">({count}件)</span>
+      <span className="text-slate-500 text-[10px]">({count})</span>
     </span>
   );
 
@@ -20,7 +20,7 @@ export function RestaurantRatings({ restaurant, compact = false }) {
       <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
         {halalFoodMaps && <RatingItem label="HFM" score={halalFoodMaps.score} count={halalFoodMaps.count} />}
         {google && <RatingItem label="Google" score={google.score} count={google.count} />}
-        {tabelog && <RatingItem label="食べログ" score={tabelog.score} count={tabelog.count} />}
+        {tabelog && <RatingItem label="Tabelog" score={tabelog.score} count={tabelog.count} />}
       </div>
     );
   }
@@ -31,21 +31,21 @@ export function RestaurantRatings({ restaurant, compact = false }) {
         <div>
           <span className="text-slate-500">Halal Food Maps</span>
           <span className="ml-1 font-semibold text-slate-800">{halalFoodMaps.score}</span>
-          <span className="text-slate-500 ml-0.5">({halalFoodMaps.count}件)</span>
+          <span className="text-slate-500 ml-0.5">({halalFoodMaps.count})</span>
         </div>
       )}
       {google && (
         <div>
           <span className="text-slate-500">Google</span>
           <span className="ml-1 font-semibold text-slate-800">{google.score}</span>
-          <span className="text-slate-500 ml-0.5">({google.count}件)</span>
+          <span className="text-slate-500 ml-0.5">({google.count})</span>
         </div>
       )}
       {tabelog && (
         <div>
-          <span className="text-slate-500">食べログ</span>
+          <span className="text-slate-500">Tabelog</span>
           <span className="ml-1 font-semibold text-slate-800">{tabelog.score}</span>
-          <span className="text-slate-500 ml-0.5">({tabelog.count}件)</span>
+          <span className="text-slate-500 ml-0.5">({tabelog.count})</span>
         </div>
       )}
     </div>
