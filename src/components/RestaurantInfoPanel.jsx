@@ -226,6 +226,29 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
           )}
         </div>
       </div>
+
+      {/* Reserve / Call bar - mobile only, fixed at bottom of panel */}
+      {(restaurant.reservationUrl || restaurant.phone) && (
+        <div className="md:hidden shrink-0 border-t border-slate-200 p-3 bg-white">
+          {restaurant.reservationUrl ? (
+            <a
+              href={restaurant.reservationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full py-3 rounded-lg bg-emerald-600 text-white font-semibold text-center hover:bg-emerald-700 transition-colors"
+            >
+              Reserve
+            </a>
+          ) : (
+            <a
+              href={`tel:${restaurant.phone}`}
+              className="block w-full py-3 rounded-lg bg-emerald-600 text-white font-semibold text-center hover:bg-emerald-700 transition-colors"
+            >
+              Call
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }

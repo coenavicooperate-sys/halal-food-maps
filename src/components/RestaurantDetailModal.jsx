@@ -14,6 +14,9 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
   const galleryPhotos = (restaurant.galleryPhotos || []).slice(0, 10);
   const mapUrl = `https://www.google.com/maps?q=${restaurant.lat},${restaurant.lng}`;
 
+  const hasReservation = !!restaurant.reservationUrl;
+  const hasPhone = !!restaurant.phone;
+
   return (
     <div className="fixed inset-0 z-[2000] flex items-end sm:items-center justify-center">
       {/* Backdrop */}
@@ -22,6 +25,29 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
         onClick={onClose}
         aria-hidden="true"
       />
+
+      {/* Fixed bottom bar - mobile only: Reserve or Call */}
+      {(hasReservation || hasPhone) && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-[2001] bg-white border-t border-slate-200 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          {hasReservation ? (
+            <a
+              href={restaurant.reservationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full py-3.5 rounded-lg bg-emerald-600 text-white font-semibold text-center hover:bg-emerald-700 transition-colors"
+            >
+              Reserve
+            </a>
+          ) : (
+            <a
+              href={`tel:${restaurant.phone}`}
+              className="block w-full py-3.5 rounded-lg bg-emerald-600 text-white font-semibold text-center hover:bg-emerald-700 transition-colors"
+            >
+              Call
+            </a>
+          )}
+        </div>
+      )}
 
       {/* Modal - full restaurant homepage style, centered on PC */}
       <div
@@ -62,7 +88,7 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
           </div>
         </div>
 
-        <div className="p-6 md:p-8 pt-4 max-w-4xl mx-auto">
+        <div className={`p-6 md:p-8 pt-4 max-w-4xl mx-auto ${(hasReservation || hasPhone) ? 'pb-24 md:pb-8' : ''}`}>
           {/* Header - centered on PC */}
           <h1 id="detail-title" className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3 text-center">
             {restaurant.name}
@@ -93,9 +119,9 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
 
           {/* Features section - max 4, horizontal scroll, portrait photo + title + desc */}
           {features.length > 0 && (
-            <section className="mb-6">
-              <h2 className="text-lg font-bold text-slate-800 mb-3">Features</h2>
-              <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth justify-center md:justify-start">
+            <section className="mb-6 -mx-6 md:-mx-8">
+              <h2 className="text-lg font-bold text-slate-800 mb-3 px-6 md:px-8">Features</h2>
+              <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth pl-6 md:pl-8 pr-6 md:pr-8">
                 {features.map((item, i) => (
                   <div key={i} className="flex-shrink-0 w-52 sm:w-64 snap-start">
                     <div className="aspect-[3/4] rounded-xl overflow-hidden bg-slate-200 mb-2">
@@ -111,9 +137,9 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
 
           {/* Recommended Menu section - max 4, horizontal scroll */}
           {recommendedMenu.length > 0 && (
-            <section className="mb-6">
-              <h2 className="text-lg font-bold text-slate-800 mb-3">Recommended Menu</h2>
-              <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth justify-center md:justify-start">
+            <section className="mb-6 -mx-6 md:-mx-8">
+              <h2 className="text-lg font-bold text-slate-800 mb-3 px-6 md:px-8">Recommended Menu</h2>
+              <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth pl-6 md:pl-8 pr-6 md:pr-8">
                 {recommendedMenu.map((item, i) => (
                   <div key={i} className="flex-shrink-0 w-52 sm:w-64 snap-start">
                     <div className="aspect-[3/4] rounded-xl overflow-hidden bg-slate-200 mb-2">
