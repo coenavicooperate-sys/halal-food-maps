@@ -138,7 +138,7 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
 
       {/* Photos - always visible, above scroll */}
       <div className="shrink-0 px-4 sm:px-6 pb-3">
-        <div className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory -mx-4 sm:mx-0 px-4 sm:px-0">
+        <div className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory -mx-4 sm:mx-0 pl-8 pr-4 sm:pl-0 sm:pr-0">
           {displayPhotos.slice(0, 5).map((url, i) => (
             <div
               key={i}

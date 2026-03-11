@@ -189,7 +189,9 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
               <div className="bg-slate-50 rounded-xl p-4 space-y-4">
                 {menuFood.length > 0 && (
                   <div>
-                    <h3 className="text-sm font-semibold text-slate-600 mb-2">Food</h3>
+                    <h3 className="text-sm font-semibold text-amber-800 bg-amber-50 px-4 py-2 rounded-lg mb-3 inline-block">
+                      🍽 Food
+                    </h3>
                     <div className="space-y-2">
                       {menuFood.map((item, i) => (
                         <div key={i} className="flex justify-between items-start gap-4">
@@ -205,7 +207,9 @@ export function RestaurantDetailModal({ restaurant, onClose }) {
                 )}
                 {menuDrinks.length > 0 && (
                   <div>
-                    <h3 className="text-sm font-semibold text-slate-600 mb-2">Drinks</h3>
+                    <h3 className="text-sm font-semibold text-sky-800 bg-sky-50 px-4 py-2 rounded-lg mb-3 inline-block">
+                      🥤 Drinks
+                    </h3>
                     <div className="space-y-2">
                       {menuDrinks.map((item, i) => (
                         <div key={i} className="flex justify-between items-start gap-4">
