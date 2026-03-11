@@ -179,7 +179,7 @@ function App() {
         </MapContainer>
 
         {/* Compact collapsible legend - above map, below restaurant panel (z-450 < panel z-500) */}
-        <div className="absolute bottom-[220px] left-4 z-[450]">
+        <div className="absolute bottom-[300px] left-4 z-[450]">
           <button
             type="button"
             onClick={() => setLegendOpen(!legendOpen)}

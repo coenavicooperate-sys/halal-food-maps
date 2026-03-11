@@ -27,7 +27,7 @@ function ListMarkerIcon({ category, halalLevel }) {
   );
 }
 
-const COLLAPSED_HEIGHT = 200;
+const COLLAPSED_HEIGHT = 280;
 const getExpandedHeight = () => Math.min(window.innerHeight * 0.9, 850);
 
 export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSelectRestaurant, onViewDetails }) {
@@ -136,30 +136,30 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
         </div>
       </div>
 
+      {/* Photos - always visible, above scroll */}
+      <div className="shrink-0 px-4 sm:px-6 pb-3">
+        <div className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory -mx-4 sm:mx-0 px-4 sm:px-0">
+          {displayPhotos.slice(0, 5).map((url, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 w-36 sm:w-40 h-24 sm:h-28 md:w-44 md:h-32 rounded-lg overflow-hidden bg-slate-200 snap-start"
+            >
+              {url ? (
+                <img src={url} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">Photo</div>
+              )}
+            </div>
+          ))}
+        </div>
+        {photos.length >= 5 && (
+          <p className="text-[10px] text-slate-400 text-center mt-1">← Swipe to see all 5 photos →</p>
+        )}
+      </div>
+
       {/* Scrollable content - centered on PC */}
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-auto">
         <div className="px-4 sm:px-6 pb-6 max-w-4xl mx-auto">
-          {/* Photos - larger on PC */}
-          <div className="mb-4">
-            <div className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory justify-center md:justify-center">
-              {displayPhotos.slice(0, 5).map((url, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 w-36 sm:w-40 h-24 sm:h-28 md:w-44 md:h-32 rounded-lg overflow-hidden bg-slate-200 snap-start"
-                >
-                  {url ? (
-                    <img src={url} alt="" className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">Photo</div>
-                  )}
-                </div>
-              ))}
-            </div>
-            {photos.length >= 5 && (
-              <p className="text-[10px] text-slate-400 text-center mt-1">← Swipe to see all 5 photos →</p>
-            )}
-          </div>
-
           {/* Description, address, hours */}
           <div className="pt-3 border-t border-slate-200 space-y-3">
             <p className="text-sm text-slate-600">{restaurant.description}</p>
