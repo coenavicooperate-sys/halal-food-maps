@@ -143,9 +143,9 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
         </div>
       </div>
 
-      {/* Photos - always visible, above scroll */}
-      <div className="shrink-0 px-4 sm:px-6 pb-3">
-        <div ref={photoScrollRef} className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory -mx-4 sm:mx-0 px-6 sm:px-0">
+      {/* Photos - always visible, above scroll - same padding as content, centered on PC */}
+      <div className="shrink-0 px-4 sm:px-6 pb-3 max-w-4xl mx-auto w-full">
+        <div ref={photoScrollRef} className="flex gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory">
           {displayPhotos.slice(0, 5).map((url, i) => (
             <div
               key={i}
