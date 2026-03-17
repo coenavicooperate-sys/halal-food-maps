@@ -63,13 +63,13 @@ export function RestaurantMarker({ restaurant, isSelected, onSelect }) {
       }}
     >
       <Popup className="restaurant-popup-transparent">
-        <div className="p-2 min-w-[200px]">
+        <div className="p-1.5 min-w-[160px] max-w-[200px]">
           {restaurant.photos?.[0] && (
-            <div className="w-full h-24 rounded-lg overflow-hidden mb-2 bg-slate-200">
+            <div className="w-full h-16 rounded overflow-hidden mb-1.5 bg-slate-200">
               <img src={restaurant.photos[0]} alt="" className="w-full h-full object-cover" />
             </div>
           )}
-          <p className="font-semibold text-gray-900 mb-1.5">{restaurant.name}</p>
+          <p className="font-semibold text-gray-900 text-sm mb-1">{restaurant.name}</p>
           <div className="flex flex-wrap gap-1 mb-1">
             <span
               className="px-2 py-0.5 rounded-full text-xs font-medium text-white"
@@ -86,7 +86,7 @@ export function RestaurantMarker({ restaurant, isSelected, onSelect }) {
               </span>
             )}
           </div>
-          <div className="mt-1.5 pt-1.5 border-t border-slate-200">
+          <div className="mt-1 pt-1 border-t border-slate-200">
             <RestaurantRatings restaurant={restaurant} compact />
           </div>
         </div>

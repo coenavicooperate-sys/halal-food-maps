@@ -97,7 +97,7 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[500] bg-white/92 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.15)] rounded-t-2xl overflow-hidden flex flex-col"
+      className="fixed bottom-0 left-0 right-0 z-[500] bg-white/90 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] rounded-t-2xl overflow-hidden flex flex-col"
       style={{
         height: currentHeight,
         transition: dragHeight !== null ? 'none' : 'height 0.3s ease-out',
