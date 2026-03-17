@@ -6,6 +6,7 @@ import { useRestaurantWithEdits } from '../hooks/useRestaurantWithEdits';
 import { useAuth } from '../contexts/AuthContext';
 import { RestaurantRatings } from './RestaurantRatings';
 import { RestaurantLocationMap } from './RestaurantLocationMap';
+import { RestaurantReviewsSection } from './RestaurantReviewsSection';
 
 export function RestaurantDetailPage() {
   const params = useParams();
@@ -324,6 +325,8 @@ export function RestaurantDetailPage() {
               </div>
             </section>
 
+            <RestaurantReviewsSection areaId={areaId} restaurantSlug={slug} />
+
             <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200 justify-center">
               <a
                 href={mapUrl}
@@ -345,6 +348,11 @@ export function RestaurantDetailPage() {
 
             <p className="text-center text-xs text-slate-400 mt-6">
               Powered by Halal Food Maps — Your online presence when you don&apos;t have a website
+            </p>
+            <p className="text-center mt-4">
+              <Link to="/login" className="text-sm text-emerald-600 hover:text-emerald-700 hover:underline">
+                For store owners
+              </Link>
             </p>
           </div>
         </div>

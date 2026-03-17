@@ -122,9 +122,6 @@ function App() {
                 />
               </div>
             </div>
-            <Link to="/login" className="text-sm text-slate-600 hover:text-emerald-600 shrink-0">
-              店舗の方
-            </Link>
           </div>
         </div>
       </header>
