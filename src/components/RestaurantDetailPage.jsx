@@ -3,19 +3,23 @@ import { Link, useParams } from 'react-router-dom';
 import { HALAL_LEVELS } from '../data/restaurants';
 import { getAreaById, getSlugFromName } from '../data/areas';
 import { useRestaurantWithEdits } from '../hooks/useRestaurantWithEdits';
+import { useRestaurantReviews } from '../hooks/useRestaurantReviews';
 import { useAuth } from '../contexts/AuthContext';
 import { RestaurantRatings } from './RestaurantRatings';
 import { RestaurantLocationMap } from './RestaurantLocationMap';
 import { RestaurantReviewsSection } from './RestaurantReviewsSection';
+import { RestaurantReviewsPreview } from './RestaurantReviewsPreview';
 
 export function RestaurantDetailPage() {
   const params = useParams();
   const areaId = params.areaId || 'shibuya';
   const slug = params.slug ?? params.filter1;
   const photoScrollRef = useRef(null);
+  const reviewsSectionRef = useRef(null);
 
   const area = getAreaById(areaId);
   const { restaurant, loading } = useRestaurantWithEdits(areaId, slug);
+  const { avgRating, count } = useRestaurantReviews(areaId, slug);
   const { loginId } = useAuth();
   const isOwnStore = restaurant && loginId === `${areaId}-${slug}`;
 
@@ -142,7 +146,10 @@ export function RestaurantDetailPage() {
             </div>
 
             <div className="mb-6 flex justify-center">
-              <RestaurantRatings restaurant={restaurant} />
+              <RestaurantRatings
+                restaurant={restaurant}
+                siteReviews={count > 0 ? { score: avgRating, count } : undefined}
+              />
             </div>
 
             <p className="text-slate-600 mb-6 text-center md:text-left">{restaurant.description}</p>
@@ -255,6 +262,12 @@ export function RestaurantDetailPage() {
               </section>
             )}
 
+            <RestaurantReviewsPreview
+              areaId={areaId}
+              restaurantSlug={slug}
+              onViewAll={() => reviewsSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            />
+
             <section className="mb-6">
               <h2 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
                 <span>📍</span> Location & Info
@@ -325,7 +338,7 @@ export function RestaurantDetailPage() {
               </div>
             </section>
 
-            <RestaurantReviewsSection areaId={areaId} restaurantSlug={slug} />
+            <RestaurantReviewsSection areaId={areaId} restaurantSlug={slug} scrollRef={reviewsSectionRef} />
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200 justify-center">
               <a

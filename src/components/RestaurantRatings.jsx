@@ -1,11 +1,16 @@
 /**
  * Displays Halal Food Maps, Google, and Tabelog review scores/counts
+ * siteReviews: { score, count } - サイト独自の口コミがあれば HFM の表示を上書き
  */
-export function RestaurantRatings({ restaurant, compact = false }) {
-  const reviews = restaurant.reviews;
-  if (!reviews) return null;
+export function RestaurantRatings({ restaurant, compact = false, siteReviews }) {
+  const reviews = restaurant?.reviews;
+  const halalFoodMaps = siteReviews?.count > 0
+    ? { score: siteReviews.score, count: siteReviews.count }
+    : reviews?.halalFoodMaps;
+  const google = reviews?.google;
+  const tabelog = reviews?.tabelog;
 
-  const { halalFoodMaps, google, tabelog } = reviews;
+  if (!halalFoodMaps && !google && !tabelog) return null;
 
   const RatingItem = ({ label, score, count }) => (
     <span className="flex items-center gap-1">

@@ -1,5 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { useRestaurantReviews } from '../hooks/useRestaurantReviews';
+
+const SORT_OPTIONS = [
+  { value: 'recent', label: 'Most recent' },
+  { value: 'highest', label: 'Highest rating' },
+  { value: 'lowest', label: 'Lowest rating' },
+];
 
 function StarRating({ value, onChange, readonly = false }) {
   const stars = [1, 2, 3, 4, 5];
@@ -29,12 +35,13 @@ function formatDate(iso) {
   }
 }
 
-export function RestaurantReviewsSection({ areaId, restaurantSlug }) {
+export function RestaurantReviewsSection({ areaId, restaurantSlug, scrollRef }) {
   const { reviews, loading, submitting, error, avgRating, count, submitReview } = useRestaurantReviews(
     areaId,
     restaurantSlug
   );
 
+  const [sortBy, setSortBy] = useState('recent');
   const [authorName, setAuthorName] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -70,10 +77,22 @@ export function RestaurantReviewsSection({ areaId, restaurantSlug }) {
     }
   };
 
+  const sortedReviews = useMemo(() => {
+    const arr = [...reviews];
+    if (sortBy === 'recent') {
+      arr.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    } else if (sortBy === 'highest') {
+      arr.sort((a, b) => b.rating - a.rating);
+    } else {
+      arr.sort((a, b) => a.rating - b.rating);
+    }
+    return arr;
+  }, [reviews, sortBy]);
+
   if (!areaId || !restaurantSlug) return null;
 
   return (
-    <section className="mb-6">
+    <section ref={scrollRef} className="mb-6 scroll-mt-4">
       <h2 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
         <span>💬</span> Reviews
         {avgRating != null && (
@@ -162,14 +181,29 @@ export function RestaurantReviewsSection({ areaId, restaurantSlug }) {
         </div>
       </form>
 
-      {/* Review list */}
+      {/* Review list with sort */}
       {loading ? (
         <p className="text-sm text-slate-500">Loading reviews...</p>
       ) : reviews.length === 0 ? (
         <p className="text-sm text-slate-500">No reviews yet. Be the first to share!</p>
       ) : (
-        <div className="space-y-4">
-          {reviews.map((r) => (
+        <>
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <span className="text-sm text-slate-600">Sort by</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+            >
+              {SORT_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="space-y-4">
+          {sortedReviews.map((r) => (
             <div key={r.id} className="p-4 bg-slate-50 rounded-xl border border-slate-100">
               <div className="flex items-center justify-between gap-2 mb-1">
                 <span className="font-medium text-slate-800">{r.author_name || 'Anonymous'}</span>
@@ -200,7 +234,8 @@ export function RestaurantReviewsSection({ areaId, restaurantSlug }) {
               )}
             </div>
           ))}
-        </div>
+          </div>
+        </>
       )}
     </section>
   );
