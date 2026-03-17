@@ -221,23 +221,23 @@ function App() {
             <span className={`transition-transform ${legendOpen ? 'rotate-180' : ''}`}>▾</span>
           </button>
           {legendOpen && (
-            <div className="mt-1.5 bg-white/95 backdrop-blur rounded-lg shadow-lg border border-slate-200 p-2.5 text-[10px] max-h-52 overflow-y-auto">
-              <div className="grid grid-cols-3 gap-x-3 gap-y-1.5">
-                <div className="col-span-3 font-semibold text-slate-600 mb-0.5">Category</div>
-                {Object.entries(CATEGORIES).map(([id, { label }]) => (
-                  <span key={id} className="flex items-center gap-1">
-                    {ICON_CATEGORIES.includes(id) ? (
-                      <img src={`/icons/${id}.png`} alt="" className="w-4 h-4 object-contain shrink-0" />
-                    ) : (
-                      <span className="w-4 h-4 rounded bg-slate-200 shrink-0 flex items-center justify-center text-[8px]">🍽</span>
-                    )}
+            <div className="mt-1.5 bg-white/95 backdrop-blur rounded-lg shadow-lg border border-slate-200 p-2 text-[9px] max-h-36 overflow-y-auto">
+              <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+                <div className="col-span-3 font-semibold text-slate-600 mb-0.5">Color</div>
+                {Object.entries(HALAL_LEVELS).map(([id, { label, color }]) => (
+                  <span key={id} className="flex items-center gap-1 col-span-3">
+                    <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: color }} />
                     {label}
                   </span>
                 ))}
-                <div className="col-span-3 font-semibold text-slate-600 mt-1.5 mb-0.5">Color</div>
-                {Object.entries(HALAL_LEVELS).map(([id, { label, color }]) => (
-                  <span key={id} className="flex items-center gap-1 col-span-3">
-                    <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: color }} />
+                <div className="col-span-3 font-semibold text-slate-600 mt-1 mb-0.5">Category</div>
+                {Object.entries(CATEGORIES).map(([id, { label }]) => (
+                  <span key={id} className="flex items-center gap-1">
+                    {ICON_CATEGORIES.includes(id) ? (
+                      <img src={`/icons/${id}.png`} alt="" className="w-3 h-3 object-contain shrink-0" />
+                    ) : (
+                      <span className="w-3 h-3 rounded bg-slate-200 shrink-0 flex items-center justify-center text-[7px]">🍽</span>
+                    )}
                     {label}
                   </span>
                 ))}
