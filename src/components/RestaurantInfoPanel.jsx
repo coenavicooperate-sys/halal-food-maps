@@ -27,7 +27,7 @@ function ListMarkerIcon({ category, halalLevel }) {
   );
 }
 
-const COLLAPSED_HEIGHT = 280;
+const COLLAPSED_HEIGHT = 200;
 const getExpandedHeight = () => Math.min(window.innerHeight * 0.9, 850);
 
 export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSelectRestaurant, onViewDetails }) {

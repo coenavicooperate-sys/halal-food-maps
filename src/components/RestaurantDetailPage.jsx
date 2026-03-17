@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { HALAL_LEVELS } from '../data/restaurants';
 import { getAreaById, getRestaurantBySlug } from '../data/areas';
 import { RestaurantRatings } from './RestaurantRatings';
+import { RestaurantLocationMap } from './RestaurantLocationMap';
 
 export function RestaurantDetailPage() {
   const params = useParams();
@@ -299,6 +300,10 @@ export function RestaurantDetailPage() {
                     )}
                   </div>
                 </div>
+              </div>
+              <div className="mt-4">
+                <p className="text-sm font-medium text-slate-700 mb-2">Map</p>
+                <RestaurantLocationMap restaurant={restaurant} />
               </div>
             </section>
 
