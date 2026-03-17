@@ -26,3 +26,9 @@ body,
 }
 
 /* Custom marker - uses inline styles in RestaurantMarker */
+
+/* Semi-transparent popup for restaurant markers */
+.restaurant-popup-transparent .leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+}

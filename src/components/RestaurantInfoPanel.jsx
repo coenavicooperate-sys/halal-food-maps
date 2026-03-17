@@ -97,7 +97,7 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[500] bg-white/90 backdrop-blur-md shadow-[0_-4px_20px_rgba(0,0,0,0.15)] rounded-t-2xl overflow-hidden flex flex-col"
+      className="fixed bottom-0 left-0 right-0 z-[500] bg-white/70 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.15)] rounded-t-2xl overflow-hidden flex flex-col"
       style={{
         height: currentHeight,
         transition: dragHeight !== null ? 'none' : 'height 0.3s ease-out',
@@ -112,7 +112,7 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
         onTouchStart={(e) => e.stopPropagation()}
-        className="shrink-0 w-full min-h-[48px] py-4 flex justify-center items-center hover:bg-slate-50 active:bg-slate-100 cursor-grab active:cursor-grabbing select-none touch-none touch-manipulation"
+        className="shrink-0 w-full min-h-[48px] py-4 flex justify-center items-center hover:bg-white/30 active:bg-white/40 cursor-grab active:cursor-grabbing select-none touch-none touch-manipulation"
         style={{ touchAction: 'none', WebkitTapHighlightColor: 'transparent' }}
         aria-label={expanded ? 'Drag down to close' : 'Drag up to expand'}
       >
@@ -206,8 +206,8 @@ export function RestaurantInfoPanel({ restaurant, filteredRestaurants = [], onSe
                     onClick={() => onSelectRestaurant?.(r)}
                     className={`w-full flex items-center gap-3 p-2.5 rounded-lg text-left transition-colors ${
                       r.id === restaurant.id
-                        ? 'bg-emerald-50 border border-emerald-200'
-                        : 'bg-slate-50 hover:bg-slate-100 border border-transparent'
+                        ? 'bg-emerald-500/20 border border-emerald-400/50'
+                        : 'bg-black/5 hover:bg-black/10 border border-transparent'
                     }`}
                   >
                     <ListMarkerIcon category={r.category} halalLevel={r.halalLevel} />

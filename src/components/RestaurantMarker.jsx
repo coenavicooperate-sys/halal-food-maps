@@ -62,7 +62,7 @@ export function RestaurantMarker({ restaurant, isSelected, onSelect }) {
         click: () => onSelect(restaurant),
       }}
     >
-      <Popup>
+      <Popup className="restaurant-popup-transparent">
         <div className="p-2 min-w-[200px]">
           {restaurant.photos?.[0] && (
             <div className="w-full h-24 rounded-lg overflow-hidden mb-2 bg-slate-200">
