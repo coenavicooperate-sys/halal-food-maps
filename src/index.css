@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Leaflet CSS (load before our overrides) */
+@import 'leaflet/dist/leaflet.css';
+
 /* Ensure full height for map container (Leaflet needs explicit dimensions) */
 html,
 body,
@@ -27,8 +30,10 @@ body,
 
 /* Custom marker - uses inline styles in RestaurantMarker */
 
-/* Semi-transparent popup for restaurant markers */
-.leaflet-popup-content-wrapper {
-  background: rgba(255, 255, 255, 0.8) !important;
+/* Semi-transparent popup for restaurant markers (override Leaflet default) */
+.leaflet-container .leaflet-popup-content-wrapper,
+.leaflet-container .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.85) !important;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
