@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useMap } from 'react-leaflet';
 
 const POPUP_STYLE = {
-  background: 'rgba(255, 255, 255, 0.6)',
+  background: 'rgba(255, 255, 255, 0.65)',
   backdropFilter: 'blur(10px)',
   WebkitBackdropFilter: 'blur(10px)',
 };
@@ -26,7 +26,7 @@ function MapInitializer() {
       style.textContent = `
         .leaflet-popup-content-wrapper,
         .leaflet-popup-tip {
-          background: rgba(255,255,255,0.6) !important;
+          background: rgba(255,255,255,0.65) !important;
           backdrop-filter: blur(10px) !important;
           -webkit-backdrop-filter: blur(10px) !important;
         }
