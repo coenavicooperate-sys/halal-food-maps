@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { HALAL_LEVELS, CATEGORIES } from './data/restaurants';
-import { AREAS, getAreaById, getRestaurantPath } from './data/areas';
+import { AREAS, getAreaById, getRestaurantPath, getLPPath } from './data/areas';
 import { RestaurantMarker } from './components/RestaurantMarker';
 import { RestaurantInfoPanel } from './components/RestaurantInfoPanel';
 import MapInitializer from './components/MapInitializer';
@@ -168,6 +168,24 @@ function App() {
             />
             <span className="text-xs text-slate-600">Prayer room</span>
           </label>
+          <span className="text-slate-300">|</span>
+          <span className="text-xs text-slate-500">Browse:</span>
+          {Object.entries(CATEGORIES)
+            .filter(([id]) => restaurants.some((r) => r.category === id))
+            .slice(0, 4)
+            .map(([id]) => (
+              <Link key={id} to={getLPPath(currentAreaId, id, null)} className="text-xs text-emerald-600 hover:underline">
+                {CATEGORIES[id].label}
+              </Link>
+            ))}
+          {Object.entries(HALAL_LEVELS)
+            .filter(([id]) => restaurants.some((r) => r.halalLevel === id))
+            .slice(0, 3)
+            .map(([id]) => (
+              <Link key={id} to={getLPPath(currentAreaId, null, id)} className="text-xs text-emerald-600 hover:underline">
+                {HALAL_LEVELS[id].label}
+              </Link>
+            ))}
         </div>
       </div>
 

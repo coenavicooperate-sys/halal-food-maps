@@ -5,7 +5,9 @@ import { getAreaById, getRestaurantBySlug } from '../data/areas';
 import { RestaurantRatings } from './RestaurantRatings';
 
 export function RestaurantDetailPage() {
-  const { areaId, slug } = useParams();
+  const params = useParams();
+  const areaId = params.areaId;
+  const slug = params.slug ?? params.filter1; // filter1 when rendered from AreaSlugRoute
   const photoScrollRef = useRef(null);
 
   const area = getAreaById(areaId || 'shibuya');

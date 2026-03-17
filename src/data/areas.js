@@ -8,12 +8,16 @@ export const AREAS = [
   {
     id: 'shibuya',
     name: 'Shibuya',
+    nameJa: '渋谷',
+    stationInfo: '渋谷駅周辺',
     center: [35.658514, 139.70133],
     restaurants: shibuyaRestaurants,
   },
   {
     id: 'shinjuku',
     name: 'Shinjuku',
+    nameJa: '新宿',
+    stationInfo: '新宿駅西口・東口周辺',
     center: [35.6895, 139.7003],
     restaurants: shinjukuRestaurants,
   },
@@ -38,3 +42,11 @@ export const getRestaurantBySlug = (areaId, slug) => {
 /** Get URL path for a restaurant detail page (e.g. /shibuya/halal-ramen-ouka) */
 export const getRestaurantPath = (areaId, restaurant) =>
   `/${areaId}/${getSlugFromName(restaurant.name)}`;
+
+/** Get URL path for dynamic LP (e.g. /shibuya/ramen, /shibuya/certified, /shibuya/ramen/certified) */
+export const getLPPath = (areaId, categoryId, halalLevelId) => {
+  const parts = [areaId];
+  if (categoryId && categoryId !== 'all') parts.push(categoryId);
+  if (halalLevelId && halalLevelId !== 'all') parts.push(halalLevelId);
+  return '/' + parts.join('/');
+};
