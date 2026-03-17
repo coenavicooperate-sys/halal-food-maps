@@ -1,18 +1,22 @@
 import { useRef, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { HALAL_LEVELS } from '../data/restaurants';
-import { getAreaById, getRestaurantBySlug } from '../data/areas';
+import { getAreaById, getSlugFromName } from '../data/areas';
+import { useRestaurantWithEdits } from '../hooks/useRestaurantWithEdits';
+import { useAuth } from '../contexts/AuthContext';
 import { RestaurantRatings } from './RestaurantRatings';
 import { RestaurantLocationMap } from './RestaurantLocationMap';
 
 export function RestaurantDetailPage() {
   const params = useParams();
-  const areaId = params.areaId;
-  const slug = params.slug ?? params.filter1; // filter1 when rendered from AreaSlugRoute
+  const areaId = params.areaId || 'shibuya';
+  const slug = params.slug ?? params.filter1;
   const photoScrollRef = useRef(null);
 
-  const area = getAreaById(areaId || 'shibuya');
-  const restaurant = getRestaurantBySlug(areaId || 'shibuya', slug);
+  const area = getAreaById(areaId);
+  const { restaurant, loading } = useRestaurantWithEdits(areaId, slug);
+  const { loginId } = useAuth();
+  const isOwnStore = restaurant && loginId === `${areaId}-${slug}`;
 
   useEffect(() => {
     if (photoScrollRef.current) {
@@ -29,8 +33,16 @@ export function RestaurantDetailPage() {
     };
   }, [restaurant, area?.name]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <p className="text-slate-600">読み込み中...</p>
+      </div>
+    );
+  }
+
   if (!restaurant) {
-    const fallbackArea = getAreaById(areaId || 'shibuya');
+    const fallbackArea = getAreaById(areaId);
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-8">
         <h1 className="text-xl font-bold text-slate-800 mb-4">Restaurant not found</h1>
@@ -67,6 +79,11 @@ export function RestaurantDetailPage() {
             <span className="font-medium">Back to map</span>
           </Link>
           <div className="flex-1 min-w-0" />
+          {isOwnStore && (
+            <Link to="/admin" className="text-sm text-emerald-600 hover:underline font-medium shrink-0">
+              店舗情報を編集
+            </Link>
+          )}
           <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center shrink-0">
             <span className="text-white text-base">🍽</span>
           </div>
