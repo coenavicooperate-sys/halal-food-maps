@@ -1,5 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useMap } from 'react-leaflet';
+
+const POPUP_STYLE = {
+  background: 'rgba(255, 255, 255, 0.82)',
+  backdropFilter: 'blur(10px)',
+  WebkitBackdropFilter: 'blur(10px)',
+};
 
 /**
  * Fixes map loading issues when container size isn't ready yet (e.g. flex layout).
@@ -8,39 +14,63 @@ import { useMap } from 'react-leaflet';
  */
 function MapInitializer() {
   const map = useMap();
+  const observerRef = useRef(null);
 
   useEffect(() => {
     if (!map) return;
 
-    // After layout has settled (flexbox needs a frame)
+    const styleId = 'hfm-popup-transparent';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = `
+        .leaflet-popup-content-wrapper,
+        .leaflet-popup-tip {
+          background: rgba(255,255,255,0.82) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
     const rafId = requestAnimationFrame(() => {
       map.invalidateSize();
       setTimeout(() => map.invalidateSize(), 150);
     });
 
+    const applyToElement = (el) => {
+      if (!el || el.dataset.hfmStyled === 'true') return;
+      Object.assign(el.style, POPUP_STYLE);
+      el.dataset.hfmStyled = 'true';
+    };
+
     const applyPopupStyle = () => {
-      const wrappers = map.getContainer().querySelectorAll('.leaflet-popup-content-wrapper');
-      wrappers.forEach((el) => {
-        el.style.setProperty('background', 'rgba(255, 255, 255, 0.85)', 'important');
-        el.style.setProperty('backdrop-filter', 'blur(10px)');
-        el.style.setProperty('-webkit-backdrop-filter', 'blur(10px)');
-      });
-      const tips = map.getContainer().querySelectorAll('.leaflet-popup-tip');
-      tips.forEach((el) => {
-        el.style.setProperty('background', 'rgba(255, 255, 255, 0.85)', 'important');
-      });
+      document.querySelectorAll('.leaflet-popup-content-wrapper').forEach(applyToElement);
+      document.querySelectorAll('.leaflet-popup-tip').forEach(applyToElement);
     };
 
     const onPopupOpen = () => {
-      requestAnimationFrame(applyPopupStyle);
+      setTimeout(applyPopupStyle, 0);
+      setTimeout(applyPopupStyle, 50);
+      setTimeout(applyPopupStyle, 150);
     };
 
     map.on('popupopen', onPopupOpen);
     applyPopupStyle();
 
+    observerRef.current = new MutationObserver(() => {
+      applyPopupStyle();
+    });
+    observerRef.current.observe(map.getContainer(), {
+      childList: true,
+      subtree: true,
+    });
+
     return () => {
       cancelAnimationFrame(rafId);
       map.off('popupopen', onPopupOpen);
+      observerRef.current?.disconnect();
     };
   }, [map]);
 
