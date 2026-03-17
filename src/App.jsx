@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { HALAL_LEVELS, CATEGORIES } from './data/restaurants';
+import { HALAL_LEVELS, CATEGORIES, ICON_CATEGORIES } from './data/restaurants';
 import { AREAS, getAreaById, getRestaurantPath, getLPPath } from './data/areas';
 import { RestaurantMarker } from './components/RestaurantMarker';
 import { RestaurantInfoPanel } from './components/RestaurantInfoPanel';
@@ -221,16 +221,22 @@ function App() {
             <span className={`transition-transform ${legendOpen ? 'rotate-180' : ''}`}>▾</span>
           </button>
           {legendOpen && (
-            <div className="mt-1.5 bg-white/95 backdrop-blur rounded-lg shadow-lg border border-slate-200 p-2.5 text-[10px]">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
-                <div className="col-span-2 font-semibold text-slate-600 mb-0.5">Category</div>
-                <span className="flex items-center gap-1"><img src="/icons/ramen.png" alt="" className="w-4 h-4 object-contain shrink-0" /> Ramen</span>
-                <span className="flex items-center gap-1"><img src="/icons/sushi.png" alt="" className="w-4 h-4 object-contain shrink-0" /> Sushi</span>
-                <span className="flex items-center gap-1"><img src="/icons/cafe.png" alt="" className="w-4 h-4 object-contain shrink-0" /> Cafe</span>
-                <span className="flex items-center gap-1"><img src="/icons/yakiniku.png" alt="" className="w-4 h-4 object-contain shrink-0" /> Yakiniku</span>
-                <div className="col-span-2 font-semibold text-slate-600 mt-1.5 mb-0.5">Color</div>
+            <div className="mt-1.5 bg-white/95 backdrop-blur rounded-lg shadow-lg border border-slate-200 p-2.5 text-[10px] max-h-52 overflow-y-auto">
+              <div className="grid grid-cols-3 gap-x-3 gap-y-1.5">
+                <div className="col-span-3 font-semibold text-slate-600 mb-0.5">Category</div>
+                {Object.entries(CATEGORIES).map(([id, { label }]) => (
+                  <span key={id} className="flex items-center gap-1">
+                    {ICON_CATEGORIES.includes(id) ? (
+                      <img src={`/icons/${id}.png`} alt="" className="w-4 h-4 object-contain shrink-0" />
+                    ) : (
+                      <span className="w-4 h-4 rounded bg-slate-200 shrink-0 flex items-center justify-center text-[8px]">🍽</span>
+                    )}
+                    {label}
+                  </span>
+                ))}
+                <div className="col-span-3 font-semibold text-slate-600 mt-1.5 mb-0.5">Color</div>
                 {Object.entries(HALAL_LEVELS).map(([id, { label, color }]) => (
-                  <span key={id} className="flex items-center gap-1 col-span-2">
+                  <span key={id} className="flex items-center gap-1 col-span-3">
                     <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: color }} />
                     {label}
                   </span>

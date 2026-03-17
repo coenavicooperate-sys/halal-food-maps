@@ -8,11 +8,19 @@ export const HALAL_LEVELS = {
   unknown: { id: 'unknown', label: 'Unknown / Checking', color: '#6b7280' },
 };
 
+export const ICON_CATEGORIES = ['ramen', 'sushi', 'yakiniku', 'cafe'];
+
 export const CATEGORIES = {
   ramen: { id: 'ramen', label: 'Ramen' },
   sushi: { id: 'sushi', label: 'Sushi' },
   yakiniku: { id: 'yakiniku', label: 'Yakiniku' },
   cafe: { id: 'cafe', label: 'Cafe' },
+  curry: { id: 'curry', label: 'Curry' },
+  kebab: { id: 'kebab', label: 'Kebab' },
+  indian: { id: 'indian', label: 'Indian' },
+  pizza: { id: 'pizza', label: 'Pizza' },
+  bakery: { id: 'bakery', label: 'Bakery' },
+  burger: { id: 'burger', label: 'Burger' },
 };
 
 // Helper: generate 5 photo URLs per restaurant (storefront, product, interior, etc.)
