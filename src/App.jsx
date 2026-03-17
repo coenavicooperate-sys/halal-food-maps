@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { HALAL_LEVELS, CATEGORIES } from './data/restaurants';
-import { AREAS, getAreaById } from './data/areas';
+import { AREAS, getAreaById, getRestaurantPath } from './data/areas';
 import { RestaurantMarker } from './components/RestaurantMarker';
 import { RestaurantInfoPanel } from './components/RestaurantInfoPanel';
-import { RestaurantDetailModal } from './components/RestaurantDetailModal';
 import MapInitializer from './components/MapInitializer';
 
 // Map tile - using CartoDB Positron for a clean, trustworthy look
@@ -26,7 +26,9 @@ function MapContent({ filteredRestaurants, selectedRestaurant, onSelectRestauran
 }
 
 function App() {
-  const [currentAreaId, setCurrentAreaId] = useState('shibuya');
+  const { areaId: urlAreaId } = useParams();
+  const navigate = useNavigate();
+  const [currentAreaId, setCurrentAreaId] = useState(urlAreaId || 'shibuya');
   const currentArea = getAreaById(currentAreaId);
   const restaurants = currentArea.restaurants;
 
@@ -35,13 +37,25 @@ function App() {
   const [halalFilter, setHalalFilter] = useState('all');
   const [prayerRoomOnly, setPrayerRoomOnly] = useState(false);
   const [legendOpen, setLegendOpen] = useState(true);
-  const [detailRestaurant, setDetailRestaurant] = useState(null);
+
+  // Sync area from URL on mount / when URL changes
+  useEffect(() => {
+    if (urlAreaId && AREAS.some((a) => a.id === urlAreaId)) {
+      setCurrentAreaId(urlAreaId);
+      const area = getAreaById(urlAreaId);
+      setSelectedRestaurant(area.restaurants[0]);
+    }
+  }, [urlAreaId]);
 
   const handleAreaChange = (areaId) => {
     setCurrentAreaId(areaId);
     const area = getAreaById(areaId);
     setSelectedRestaurant(area.restaurants[0]);
-    setDetailRestaurant(null);
+    navigate(`/${areaId}`);
+  };
+
+  const handleViewDetails = (restaurant) => {
+    navigate(getRestaurantPath(currentAreaId, restaurant));
   };
 
   const filteredRestaurants = useMemo(() => {
@@ -215,15 +229,7 @@ function App() {
           restaurant={displayRestaurant}
           filteredRestaurants={filteredRestaurants}
           onSelectRestaurant={setSelectedRestaurant}
-          onViewDetails={setDetailRestaurant}
-        />
-      )}
-
-      {/* View details modal */}
-      {detailRestaurant && (
-        <RestaurantDetailModal
-          restaurant={detailRestaurant}
-          onClose={() => setDetailRestaurant(null)}
+          onViewDetails={handleViewDetails}
         />
       )}
     </div>

@@ -20,3 +20,21 @@ export const AREAS = [
 ];
 
 export const getAreaById = (id) => AREAS.find((a) => a.id === id) ?? AREAS[0];
+
+/** Generate URL slug from restaurant name (e.g. "Halal Ramen Ouka" -> "halal-ramen-ouka") */
+export const getSlugFromName = (name) =>
+  name
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+/** Find restaurant by area and slug. Returns null if not found. */
+export const getRestaurantBySlug = (areaId, slug) => {
+  const area = getAreaById(areaId);
+  if (!area) return null;
+  return area.restaurants.find((r) => getSlugFromName(r.name) === slug) ?? null;
+};
+
+/** Get URL path for a restaurant detail page (e.g. /shibuya/halal-ramen-ouka) */
+export const getRestaurantPath = (areaId, restaurant) =>
+  `/${areaId}/${getSlugFromName(restaurant.name)}`;
